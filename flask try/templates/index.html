@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Name Form</title>
+</head>
+<body>
+    <h1>Enter Names</h1>
+    <form method="POST">
+
+        <label for="name{{ i }}">Name {{ i }}:</label>
+        <input type="text" id="name{{ i }}" name="name{{ i }}" placeholder="Enter Name {{ i }}" required><br><br>
+        {% endfor %}
+        
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
