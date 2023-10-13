@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Name Form</title>
-</head>
-<body>
-    <h1>Enter Names</h1>
-    <form method="POST">
 
-        <label for="name{{ i }}">Name {{ i }}:</label>
-        <input type="text" id="name{{ i }}" name="name{{ i }}" placeholder="Enter Name {{ i }}" required><br><br>
-        {% endfor %}
-        
-        <input type="submit" value="Submit">
-    </form>
+<head>
+    <title>Enter Names</title>
+    <link rel="stylesheet" href="/flask try/templates/style.css">
+</head>
+
+<body>
+    <center>
+        <h2>Enter Names</h2>
+        <form id="nameForm">
+            <div style = class="nameField" id="nameFields">
+                <!-- New text fields will appear here -->
+            </div>
+            <!-- the id is linked to the script that allows for more name fields to be added-->
+            <div>
+                <div class="button_container">
+                        <button type="button" id="addName">Add Name</button>
+                        <input type="submit" value="Submit">
+                </div>
+                    <div id="nameList">
+                        <!-- Names will be displayed here -->
+                    </div>
+            </div
+        </form>
+        <script src="/flask try/templates/script.js">
+        </script>
+    </center>
 </body>
+
 </html>

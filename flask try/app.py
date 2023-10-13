@@ -10,6 +10,7 @@ def save_to_csv(data):
         writer.writerow(data)
 
 @app.route('/', methods=['GET', 'POST'])
+
 def index():
     if request.method == 'POST':
         # Process the submitted form data
@@ -22,7 +23,7 @@ def index():
         if names:
             save_to_csv(names)
 
-    return render_template('/index.html')
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
