@@ -25,7 +25,7 @@ select {
     padding: 10px 10px;
     /* creates some space between each of the buttons */
     margin-bottom: 1px;
-    border: 1px solid #ccc;
+    border: 1px solid #6D213C;
     border-radius: 5px;
 
 }
@@ -65,10 +65,10 @@ div {
 /* Style the select (dropdown) element */
 select {
     width: 100%; /* Set the width to 100% to match the container width */
-    padding: 12px 20px;
+    padding: 10px 20px;
     margin: 8px 8px;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 1px solid #6D213C;
     border-radius: 4px;
     box-sizing: border-box;
     background-color: #fff; /* Background color for the dropdown */
@@ -79,4 +79,6 @@ select {
 /* Apply styles on hover for the dropdown */
 select:hover {
     border-color: #666; /* Change border color on hover */
+    color: #6D213C;
+
 }
