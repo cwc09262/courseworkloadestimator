@@ -1,28 +1,15 @@
-from flask import Flask, render_template, request
-import csv
+# Import the Flask library and render_template function
+from flask import Flask, render_template
 
+# Create a Flask application instance
 app = Flask(__name__)
 
-# Function to save data to a CSV file
-def save_to_csv(data):
-    with open('/names.csv', mode='a', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(data)
-
-@app.route('/', methods=['GET', 'POST'])
+# Define a route for the root URL ("/")
+@app.route('/')
 def index():
-    if request.method == 'POST':
-        # Process the submitted form data
-        names = []
-        for i in range(1, 6):
-            name = request.form.get(f'name{i}')
-            if name:
-                names.append(name)
+    # Render the 'index.html' template and return it as the response
+    return render_template('index.html')
 
-        if names:
-            save_to_csv(names)
-
-    return render_template('/index.html')
-
+# Run the Flask application when this script is executed
 if __name__ == '__main__':
     app.run(debug=True)
