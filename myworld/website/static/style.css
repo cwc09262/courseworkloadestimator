@@ -59,6 +59,7 @@ div {
 /* makes the button land on the same line */
 .button_container {
     display: flex;
+
     gap: 20px;
 }
 
