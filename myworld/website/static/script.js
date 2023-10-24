@@ -9,7 +9,7 @@ document.getElementById("addcourse").addEventListener("click", function () {
     // Create a dropdown (select) element
     var courseDropdown = document.createElement("select");
     courseDropdown.name = "department";
-    courseDropdown.id = "my-dropdown";
+    courseDropdown.className = "department-select"; // Add a class for selection
 
     // Define the URL to your CSV file
     const departData = "static/data/department_codes.csv"; // Update the file path
@@ -53,29 +53,18 @@ document.getElementById("addcourse").addEventListener("click", function () {
     // Create a text input field
     var courseInput = document.createElement("input");
     courseInput.type = "text";
-    courseInput.name = "course_number";
+    courseInput.name = "course_number[]"; // Use an array for the name attribute
     courseInput.placeholder = "Enter a Course Number";
 
-    // Add an event listener to capture the input value
-    courseInput.addEventListener("change", function () {
-        var department = courseDropdown.value;
-        var inputValue = courseInput.value;
-        courseFields.style.display = 'block';
+    // ... (rest of the code remains the same)
 
-        // Now, "inputValue" contains the value entered by the user in the text input field
-        console.log("User entered:", department, inputValue);
-    });
-
-    // Append the text input field to the container
+    // Append the dropdown and text input fields to the container
+    container.appendChild(courseDropdown);
     container.appendChild(courseInput);
 
     // Set the display property of dropdown and text field to inline
     courseDropdown.style.display = "inline";
     courseInput.style.display = "inline";
-
-    // Append the dropdown and text field to the container
-    container.appendChild(courseDropdown);
-    container.appendChild(courseInput);
 
     // Append the container to the "courseFields" div
     courseFields.appendChild(container);
