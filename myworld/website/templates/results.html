@@ -1,41 +1,22 @@
+<!-- results.html -->
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Homework Schedule</title>
-    <style>
-        /* CSS for formatting homework times */
-        .homework-time {
-            font-weight: bold;
-            color: #007bff;
-        }
-        /* CSS for the home button */
-        .home-button {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .home-button:hover {
-            background-color: #555;
-        }
-    </style>
+    <title>Results Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-    <!-- Home button to return to the main page -->
-    <a href="main.html" class="home-button">Home</a>
-    
-    <h1>Homework Schedule</h1>
-
-    <p>Your homework for the day:</p>
-
-    <ul>
-        <li>Math homework: <span class="homework-time">5:00 PM</span></li>
-        <li>Science homework: <span class="homework-time">6:30 PM</span></li>
-        <li>History homework: <span class="homework-time">7:45 PM</span></li>
-    </ul>
-
+    <center>
+        <h2>Results Page</h2>
+        <p>Calculated Homework Time:</p>
+        <ul>
+            {% for course in courses %}
+                <li>Department: {{ course.Department }}, Course Name: {{ course.CourseName }}</li>
+            {% endfor %}
+        </ul>
+    </center>
 </body>
+
 </html>

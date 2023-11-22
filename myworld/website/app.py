@@ -11,11 +11,11 @@ courses = []
 def index():
     return render_template('index.html')
 
-# need to build reults page. 
+# Adding the user input data into 'userInput.csv'
+@app.route('/results', methods=['GET'])
+def results():
+    return render_template('results.html', courses=courses)
 
-'''
-Adding the user input data into 'userInput.csv'
-'''
 @app.route('/submit', methods=['POST'])
 def submit():
     department = request.form.getlist('department')
@@ -43,13 +43,6 @@ def submit():
     
     else:
         return "Bad Request: missing course data."
-
-
-'''
-Watchdog stuff below
-This will monitor the data imputed into 'userInput.csv' and run other scripts.
-This will then generate the calculated homework time, and will output to the results page. 
-'''
 
 if __name__ == '__main__':
     app.run(debug=True)
