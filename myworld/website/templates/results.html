@@ -1,22 +1,71 @@
-<!-- results.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Results Page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
 </head>
 
 <body>
-    <center>
-        <h2>Results Page</h2>
-        <p>Calculated Homework Time:</p>
-        <ul>
-            {% for course in courses %}
-                <li>Department: {{ course.Department }}, Course Name: {{ course.CourseName }}</li>
-            {% endfor %}
-        </ul>
-    </center>
+
+    <h1>Course Information</h1>
+
+   
+<script>
+
+    // Fetch data from the server
+    fetch('/static/data/course_data.csv')
+        .then(response => response.text())  // Fetch as text
+        .then(csvData => {
+            // Function to convert CSV data to JSON
+            function convertCsvToJson(csvData) {
+                const lines = csvData.split('\n');
+                const headers = lines[0].split(',');
+                const jsonData = [];
+
+                for (let i = 1; i < lines.length; i++) {
+                    const currentLine = lines[i].split(',');
+                    const course = {};
+
+                    for (let j = 0; j < headers.length; j++) {
+                        course[headers[j]] = currentLine[j];
+                    }
+
+                    jsonData.push(course);
+                }
+
+                return jsonData;
+            }
+
+            // Convert CSV data to JSON
+            const jsonData = convertCsvToJson(csvData);
+
+            // Courses to display
+            const coursesToDisplay = {{ courses_data|tojson }};
+
+            // Display the data for the selected courses
+            const courseList = document.createElement('ul');
+            document.body.appendChild(courseList);  // Append the list to the body
+
+            coursesToDisplay.forEach(courseName => {
+                const course = jsonData.find(c => c.CourseName === courseName);
+                if (course) {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        <strong>Course Name:</strong> ${course.CourseName}<br>
+                        <strong>Year:</strong> ${course.Year}<br>
+                        <strong>Homework Time:</strong> ${course.HWTime}<br><br>
+                    `;
+                    courseList.appendChild(listItem);
+                }
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+</script>
+
+
+
 </body>
 
 </html>

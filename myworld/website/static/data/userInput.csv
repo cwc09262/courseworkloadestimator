@@ -1,7 +1,58 @@
-Department,CourseName
-undefined,
-undefined,
-undefined,
-undefined,
-undefined,
-undefined,
+CourseName,Year,Credits,Lab,RorW, HWTime
+BIBL 200,Freshman,3.0,No,Neither,2.0
+BIOL 233L,Sophomore,3.0,Yes,Reading,6.0
+BUSA 221,Sophomore,3.0,No,Neither,2.0
+CHEM 211,Sophomore,3.0,No,Neither,3.0
+CHEM 231,Sophomore,3.0,No,Neither,3.0
+CHEM 231L,Sophomore,1.0,Yes,Wrting,2.0
+CHEM 231W,Sophomore,1.0,Yes,Wrting,3.0
+COMM 120,Junior,3.0,No,Neither,1.0
+COMM 220,Sophomore,3.0,No,Neither,1.0
+CSCI 175,Freshman,3.0,No,Neither,1.0
+CSCI 200,Freshman,3.0,No,Neither,2.0
+CSCI 201,Sophomore,3.0,No,Neither,4.0
+CSCI 250,Sophomore,3.0,No,Neither,4.0
+CSCI 310,Sophomore,3.0,No,Neither,2.0
+CSCI 320,Junior,3.0,No,Neither,4.0
+CSCI 325,Junior,3.0,No,Neither,4.0
+CSCI 330B,Junior,3.0,No,Neither,4.0
+CSCI 405,Senior,3.0,No,Neither,4.0
+CSCI 410,Junior,3.0,No,Neither,3.0
+DTSC 220,Freshman,3.0,No,Neither,3.0
+DTSC 250,Sophomore,3.0,No,Neither,1.0
+DTSC 320,Senior,3.0,No,Neither,4.0
+DTSC 380,Senior,3.0,No,Neither,1.0
+ECON 203,Sophomore,3.0,No,Both,1.0
+EDUC 308,Junior,3.0,No,Reading,1.0
+EDUC 402,Junior,3.0,No,Neither,2.0
+EDUC 403,Junior,3.0,No,Wrting,2.0
+ENGL 102,Freshman,3.0,No,Both,5.0
+ENGL 235,Sophomore,3.0,No,Reading,2.0
+EXSC 201,Sophomore,3.0,No,Neither,0.0
+FINA 350,Junior,3.0,No,Neither,8.0
+HIST 160,Sophomore,3.0,No,Reading,3.0
+HIST 372,Sophomore,3.0,No,Both,4.0
+HONR 330,Junior,1.0,No,Neither,1.0
+INST 150,Freshman,3.0,No,Neither,1.0
+LDEV 200,Sophomore,3.0,No,Both,2.0
+MATH 160,Freshman,3.0,No,Neither,2.0
+MATH 161,Freshman,3.0,No,Neither,3.0
+MATH 221,Freshman,3.0,No,Neither,2.0
+MATH 240,Freshman,3.0,No,Neither,2.0
+MATH 244,Sophomore,3.0,No,Neither,2.0
+MATH 330,Junior,3.0,No,Neither,2.0
+MATH 414,Junior,3.0,No,Wrting,2.0
+MISS 100,Sophomore,3.0,No,Reading,2.0
+MKTG 202,Freshman,3.0,No,Both,2.0
+MUSI 145,Senior,2.0,No,Neither,1.0
+Math 107,Junior,3.0,No,Wrting,3.0
+Math 160,Freshman,3.0,No,Neither,3.0
+NURS 220,Sophomore,3.0,No,Reading,3.0
+PHYS 151,Sophomore,3.0,No,Neither,3.0
+PSYC 220,Sophomore,3.0,No,Neither,1.0
+PSYC 318,Sophomore,3.0,No,Both,3.0
+PSYC 340W,Sophomore,3.0,No,Wrting,8.0
+Psyc 205,Sophomore,3.0,No,Neither,8.0
+SOWK 110,Sophomore,3.0,No,Reading,0.0
+SPAN 101,Junior,3.0,No,Both,2.0
+THEO 210,Freshman,3.0,No,Neither,2.0
