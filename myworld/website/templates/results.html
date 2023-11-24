@@ -6,66 +6,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Results</title>
 </head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #666;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+    }
 
+    h1 {
+        color: #6D213C;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #d7d6d6;
+        width: 75%;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        justify-content: center;
+        align-items: center;
+    }
+    </style>
 <body>
 
-    <h1>Course Information</h1>
+     <h1 style="color: white;">Course Information</h1>
 
-   
-<script>
 
-    // Fetch data from the server
-    fetch('/static/data/course_data.csv')
-        .then(response => response.text())  // Fetch as text
-        .then(csvData => {
-            // Function to convert CSV data to JSON
-            function convertCsvToJson(csvData) {
-                const lines = csvData.split('\n');
-                const headers = lines[0].split(',');
-                const jsonData = [];
+    <script>
 
-                for (let i = 1; i < lines.length; i++) {
-                    const currentLine = lines[i].split(',');
-                    const course = {};
+        // Fetch data from the server
+        fetch('/static/data/course_data.csv')
+            .then(response => response.text())  // Fetch as text
+            .then(csvData => {
+                // Function to convert CSV data to JSON
+                function convertCsvToJson(csvData) {
+                    const lines = csvData.split('\n');
+                    const headers = lines[0].split(',');
+                    const jsonData = [];
 
-                    for (let j = 0; j < headers.length; j++) {
-                        course[headers[j]] = currentLine[j];
+                    for (let i = 1; i < lines.length; i++) {
+                        const currentLine = lines[i].split(',');
+                        const course = {};
+
+                        for (let j = 0; j < headers.length; j++) {
+                            course[headers[j]] = currentLine[j];
+                        }
+
+                        jsonData.push(course);
                     }
 
-                    jsonData.push(course);
+                    return jsonData;
                 }
 
-                return jsonData;
-            }
+                // Convert CSV data to JSON
+                const jsonData = convertCsvToJson(csvData);
 
-            // Convert CSV data to JSON
-            const jsonData = convertCsvToJson(csvData);
+                // Courses to display
+                const coursesToDisplay = {{ courses_data| tojson
+            }};
 
-            // Courses to display
-            const coursesToDisplay = {{ courses_data|tojson }};
+        // Display the data for the selected courses
+        const courseList = document.createElement('ul');
+        document.body.appendChild(courseList);  // Append the list to the body
 
-            // Display the data for the selected courses
-            const courseList = document.createElement('ul');
-            document.body.appendChild(courseList);  // Append the list to the body
-
-            coursesToDisplay.forEach(courseName => {
-                const course = jsonData.find(c => c.CourseName === courseName);
-                if (course) {
-                    const listItem = document.createElement('li');
-                    listItem.innerHTML = `
-                        <strong>Course Name:</strong> ${course.CourseName}<br>
-                        <strong>Year:</strong> ${course.Year}<br>
-                        <strong>Homework Time:</strong> ${course.HWTime}<br><br>
+        coursesToDisplay.forEach(courseName => {
+            const course = jsonData.find(c => c.CourseName === courseName);
+            if (course) {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                        <h1>${course.CourseName}</h1>
+                        <strong>Most Students take this when they are a ${course.Year} </strong><br>
+                        <strong>Homework Time:</strong> ${course.HWTime} hour(s) a week.<br>
+                        ${course.lab === 'Yes' ? 'It is a lab' : 'It is not a lab'}<br>
+                        ${course.RorW === 'Both' ? 'This is both a Reading and Writing Intensive Course' :
+                        course.RorW === 'Reading' ? 'This is a Reading Intensive Course' :
+                            course.RorW === 'Writing' ? 'This is a Writing Intensive Course' :
+                                'This is not a Reading or Writing Intensive Course'} <br> <br>
                     `;
-                    courseList.appendChild(listItem);
-                }
-            });
+                courseList.appendChild(listItem);
+            }
+        });
         })
-        .catch(error => console.error('Error fetching data:', error));
-</script>
-
-
-
-</body>
-
-</html>
+        .catch (error => console.error('Error fetching data:', error));
+    </script>
