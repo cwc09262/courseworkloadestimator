@@ -37,7 +37,7 @@ document.getElementById("addcourse").addEventListener("click", function () {
                 option.text = code;
                 courseDropdown.appendChild(option);
                 // Inside the complete callback of Papa.parse
-                console.log("Parsed department codes:", departmentCodes);
+                // console.log("Parsed department codes:", departmentCodes);
             }
 
             // Now that the dropdown is populated, you can set its value if needed

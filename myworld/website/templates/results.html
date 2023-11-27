@@ -4,11 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Results</title>
 </head>
 <style>
     body {
-        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+
+    /* If you have a container element, you can center it with margin */
+    #container {
+        margin: 0 auto;
+        /* Center the container horizontally */
+        text-align: left;
+        /* Reset text alignment for inner elements */
+        max-width: 800px;
+        /* Adjust the maximum width as needed */
+    }
+
+    /* Adjust other styles as needed for specific elements */
+    h1,
+    h2,
+    p,
+    ul,
+    li {
+        text-align: left;
+        /* Reset text alignment for specific elements */
+    }
+
+    body {
+
+        font-family: 'Times New Roman', Times, serif;
         background-color: #666;
         color: #333;
         margin: 0;
@@ -37,66 +63,90 @@
         justify-content: center;
         align-items: center;
     }
+    top {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+            margin-bottom: 20px; /* Adjust as needed */
+            width: 75%;
+        }
+
+        .button {
+            width: 20%;
+        }
     </style>
+</head>
 <body>
 
-     <h1 style="color: white;">Course Information</h1>
 
+    <!-- Custom 'top' element for heading and button -->
+    <top>
+        <h1  style="color: white;">Course Information</h1>
+        <!-- Add a button to go back to 'index' route -->
+        <a href="{{ url_for('index') }}" class="button"><button>Go Back</button></a>
+    </top>
 
-    <script>
+</body>
+<script>
+    // Fetch data from the server
+    fetch('/static/data/course_data.csv')
+        .then(response => response.text())  // Fetch as text
+        .then(csvData => {
+            // Function to convert CSV data to JSON
+            function convertCsvToJson(csvData) {
+                const lines = csvData.split('\n');
+                const headers = lines[0].split(',');
+                const jsonData = [];
 
-        // Fetch data from the server
-        fetch('/static/data/course_data.csv')
-            .then(response => response.text())  // Fetch as text
-            .then(csvData => {
-                // Function to convert CSV data to JSON
-                function convertCsvToJson(csvData) {
-                    const lines = csvData.split('\n');
-                    const headers = lines[0].split(',');
-                    const jsonData = [];
+                for (let i = 1; i < lines.length; i++) {
+                    const currentLine = lines[i].split(',');
+                    const course = {};
 
-                    for (let i = 1; i < lines.length; i++) {
-                        const currentLine = lines[i].split(',');
-                        const course = {};
-
-                        for (let j = 0; j < headers.length; j++) {
-                            course[headers[j]] = currentLine[j];
-                        }
-
-                        jsonData.push(course);
+                    for (let j = 0; j < headers.length; j++) {
+                        course[headers[j]] = currentLine[j];
                     }
 
-                    return jsonData;
+                    jsonData.push(course);
                 }
 
-                // Convert CSV data to JSON
-                const jsonData = convertCsvToJson(csvData);
-
-                // Courses to display
-                const coursesToDisplay = {{ courses_data| tojson
-            }};
-
-        // Display the data for the selected courses
-        const courseList = document.createElement('ul');
-        document.body.appendChild(courseList);  // Append the list to the body
-
-        coursesToDisplay.forEach(courseName => {
-            const course = jsonData.find(c => c.CourseName === courseName);
-            if (course) {
-                const listItem = document.createElement('li');
-                listItem.innerHTML = `
-                        <h1>${course.CourseName}</h1>
-                        <strong>Most Students take this when they are a ${course.Year} </strong><br>
-                        <strong>Homework Time:</strong> ${course.HWTime} hour(s) a week.<br>
-                        ${course.lab === 'Yes' ? 'It is a lab' : 'It is not a lab'}<br>
-                        ${course.RorW === 'Both' ? 'This is both a Reading and Writing Intensive Course' :
-                        course.RorW === 'Reading' ? 'This is a Reading Intensive Course' :
-                            course.RorW === 'Writing' ? 'This is a Writing Intensive Course' :
-                                'This is not a Reading or Writing Intensive Course'} <br> <br>
-                    `;
-                courseList.appendChild(listItem);
+                return jsonData;
             }
-        });
-        })
-        .catch (error => console.error('Error fetching data:', error));
-    </script>
+
+            // Convert CSV data to JSON
+            const jsonData = convertCsvToJson(csvData);
+
+            // Courses to display
+            const coursesToDisplay = {{ courses_data| tojson
+        }};
+
+    // Display the data for the selected courses
+    const courseList = document.createElement('ul');
+    document.body.appendChild(courseList);  // Append the list to the body
+
+    coursesToDisplay.forEach(courseName => {
+        const course = jsonData.find(c => c.CourseName === courseName);
+        const listItem = document.createElement('li');
+
+        if (course) {
+            listItem.innerHTML = `
+                    <h1>${course.CourseName}</h1>
+                    <strong>Most students take this when they are in ${course.Year}.</strong><br>
+                    <strong>Homework Time:</strong> ${course.HWTime} hour(s) a week.<br>
+                    ${course.lab === 'Yes' ? 'It is a lab' : 'It is not a lab'}<br>
+                    ${course.RorW === 'Both' ? 'This is both a Reading and Writing Intensive Course' :
+                    course.RorW === 'Reading' ? 'This is a Reading Intensive Course' :
+                        course.RorW === 'Writing' ? 'This is a Writing Intensive Course' :
+                            'This is not a Reading or Writing Intensive Course'} <br> <br>
+                `;
+        } else {
+            listItem.innerHTML = `<h1>${courseName}</h1> <br> Course information is not available.</p>`;
+        }
+
+        courseList.appendChild(listItem);
+    });
+    })
+    .catch (error => console.error('Error fetching data:', error));
+
+
+</script>

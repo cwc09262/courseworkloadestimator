@@ -55,38 +55,6 @@ def load_csv_data():
         csv_reader = csv.DictReader(csv_file)
         courses = list(csv_reader)
     return courses
-'''
-# Add new courses
-@app.route('/submit', methods=['POST'])
-def submit():
-    department = request.form.getlist('department')
-    course_numbers = request.form.getlist('course_number[]')
-
-    if department and course_numbers:
-        # Combine Department and CourseNumber with a space in between
-        course_names_combined = [dept + ' ' + str(course_num) for dept, course_num in zip(department, course_numbers)]
-
-        # Add the course data to the list
-        new_courses = [{"Department": dept, "CourseName": course_name} for dept, course_name in zip(department, course_names_combined)]
-        courses.extend(new_courses)
-
-        # Write the data to a CSV file
-        with open('static/data/userInput.csv', 'a', newline='') as csv_file:
-            fieldnames = ["Department", "CourseName"]
-            csv_writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-
-            # If the file is empty, write the header
-            if csv_file.tell() == 0:
-                csv_writer.writeheader()
-
-            # Write the course data
-            for dept, course_name in zip(department, course_names_combined):
-                csv_writer.writerow({"Department": dept, "CourseName": course_name})
-
-        return redirect(url_for("results"))
-    else:
-        return "Bad Request: missing course data."
-'''
 
 if __name__ == '__main__':
     load_csv_data()  # Load the CSV data at the start
