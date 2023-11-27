@@ -18,6 +18,7 @@ def load_csv_data():
 def index():
     return render_template('index.html')
 
+# Results page
 @app.route('/results', methods=['GET', 'POST'])
 def show_results():
     if request.method == 'POST':

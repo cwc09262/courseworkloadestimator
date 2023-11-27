@@ -34,6 +34,25 @@
     </center>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // These scripts are to prevent people trying to submit without entering any data
+        // THis also prevents 'scary' error pages from coming up if they do try to hit submit without entering data
+        document.getElementById("addcourse").addEventListener("click", function () {
+            const courseFields = document.getElementById("courseFields");
+            // ... (rest of your JavaScript code)
+            // Enable the submit button if at least one entry is made
+            const submitButton = document.getElementById("submitButton");
+            submitButton.disabled = false;
+        });
+        document.getElementById("courseForm").addEventListener("submit", function (event) {
+            const courseDropdowns = document.querySelectorAll(".department-select");
+            // Check if at least one entry is made
+            if (courseDropdowns.length === 0) {
+                alert("Please add at least one course entry before submitting.");
+                event.preventDefault(); // Prevent the form from being submitted
+            }
+        });
+    </script>
 </body>
 
 </html>

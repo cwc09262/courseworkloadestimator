@@ -8,32 +8,14 @@
     <title>Results</title>
 </head>
 <style>
-    body {
-        text-align: center;
-    }
-
-    /* If you have a container element, you can center it with margin */
-    #container {
-        margin: 0 auto;
-        /* Center the container horizontally */
-        text-align: left;
-        /* Reset text alignment for inner elements */
-        max-width: 800px;
-        /* Adjust the maximum width as needed */
-    }
 
     /* Adjust other styles as needed for specific elements */
-    h1,
-    h2,
-    p,
-    ul,
-    li {
+    h1,h2,p,ul,li {
         text-align: left;
         /* Reset text alignment for specific elements */
     }
 
     body {
-
         font-family: 'Times New Roman', Times, serif;
         background-color: #666;
         color: #333;
@@ -106,10 +88,8 @@
                     for (let j = 0; j < headers.length; j++) {
                         course[headers[j]] = currentLine[j];
                     }
-
                     jsonData.push(course);
                 }
-
                 return jsonData;
             }
 
@@ -131,7 +111,7 @@
         if (course) {
             listItem.innerHTML = `
                     <h1>${course.CourseName}</h1>
-                    <strong>Most students take this when they are in ${course.Year}.</strong><br>
+                    <strong>Most students take this when they are a ${course.Year}.</strong><br>
                     <strong>Homework Time:</strong> ${course.HWTime} hour(s) a week.<br>
                     ${course.lab === 'Yes' ? 'It is a lab' : 'It is not a lab'}<br>
                     ${course.RorW === 'Both' ? 'This is both a Reading and Writing Intensive Course' :
@@ -140,7 +120,10 @@
                             'This is not a Reading or Writing Intensive Course'} <br> <br>
                 `;
         } else {
-            listItem.innerHTML = `<h1>${courseName}</h1> <br> Course information is not available.</p>`;
+            listItem.innerHTML = `<h1>${courseName}</h1> <br> Course information is not available.</p>   
+                                <p>The requested course was not found in the system.</p>
+                                <p>Please check the entered information and try again.</p>
+                                 `;
         }
 
         courseList.appendChild(listItem);

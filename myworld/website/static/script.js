@@ -10,9 +10,14 @@ document.getElementById("addcourse").addEventListener("click", function () {
     const courseDropdown = document.createElement("select");
     courseDropdown.name = "department";
     courseDropdown.className = "department-select"; // Add a class for selection
-
     // Define the URL to your CSV file
     const departmentCodesCSV = "static/data/department_codes.csv"; // Update the file path
+
+     // Check if at least one entry is made
+     if (courseFields.length === 0) {
+        alert("Please add at least one course entry before submitting.");
+        event.preventDefault(); // Prevent the form from being submitted
+    }
 
     // Fetch data from the CSV file
     fetch(departmentCodesCSV)
@@ -67,4 +72,13 @@ document.getElementById("addcourse").addEventListener("click", function () {
 
     // Append the container to the "courseFields" div
     courseFields.appendChild(container);
+});
+document.getElementById("courseForm").addEventListener("submit", function (event) {
+    const courseDropdowns = document.querySelectorAll(".department-select");
+
+    // Check if at least one entry is made
+    if (courseDropdowns.length === 0) {
+        alert("Please add at least one course entry before submitting.");
+        event.preventDefault(); // Prevent the form from being submitted
+    }
 });
