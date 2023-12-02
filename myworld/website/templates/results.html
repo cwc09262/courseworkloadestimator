@@ -8,9 +8,12 @@
     <title>Results</title>
 </head>
 <style>
-
     /* Adjust other styles as needed for specific elements */
-    h1,h2,p,ul,li {
+    h1,
+    h2,
+    p,
+    ul,
+    li {
         text-align: left;
         /* Reset text alignment for specific elements */
     }
@@ -19,11 +22,13 @@
         font-family: 'Times New Roman', Times, serif;
         background-color: #666;
         color: #333;
-        margin: 0;
+        margin: auto;
         padding: 0;
-        box-sizing: border-box;
-        justify-content: center;
+        display: flex;
+        width: 75%;
+        flex-direction: column;
         align-items: center;
+        box-sizing: border-box;
     }
 
     h1 {
@@ -36,35 +41,46 @@
     }
 
     li {
+        margin: auto;
         margin-bottom: 20px;
         padding: 15px;
         background-color: #d7d6d6;
-        width: 75%;
+        width: 100%;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         justify-content: center;
         align-items: center;
     }
-    top {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            justify-content: space-between;
-            margin-bottom: 20px; /* Adjust as needed */
-            width: 75%;
-        }
 
-        .button {
-            width: 20%;
-        }
-    </style>
+    top {
+        display: flex;
+        flex-direction: row;
+        position: sticky;
+        top: 0;
+        margin-bottom: 20px;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        /* Adjust as needed */
+        width: 75%;
+        background-color: #666;
+    }
+
+
+
+    .button {
+        width: 20%;
+    }
+</style>
 </head>
-<body>
+
+<body style="margin: auto;">
 
 
     <!-- Custom 'top' element for heading and button -->
     <top>
-        <h1  style="color: white;">Course Information</h1>
+        <h1 style="color: white;">Course Information</h1>
         <!-- Add a button to go back to 'index' route -->
         <a href="{{ url_for('index') }}" class="button"><button>Go Back</button></a>
     </top>
